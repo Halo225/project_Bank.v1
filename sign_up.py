@@ -27,6 +27,8 @@ def generate_account_number():
 
 ask_if_has_account()
 
+
+# i trying to get it to save the account created but it is not working
 def save_account(username, email, password, account_number):
     with open("sign_up.csv", "a") as file:
         file.write(",".join([username, email, password, account_number]) + "\n")
