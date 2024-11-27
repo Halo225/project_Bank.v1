@@ -2,6 +2,7 @@ import random
 import csv
 import hashlib
 from os import write
+from Main import main
 
 
 def ask_if_has_account():
@@ -11,6 +12,7 @@ def ask_if_has_account():
             if user_input == 'Y':
                 print("Great! You have an account.")
                 login_account()
+                main()
             else:
                 print("No worries! Let's create an account for you.")
                 create_account()
@@ -40,6 +42,26 @@ def create_account():
 
 def generate_account_number():
     return random.randint(1000000000, 9999999999)
+
+
+def login_account():
+    attempts = 0
+    while attempts < 3:
+        username = input("Enter your username: ")
+        password = input("Enter your password: ")
+        hashed_password = hash_password(password)
+
+        with open('sign_up.csv', 'r') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                if row[0] == username and row[2] == hashed_password:
+                    print(f"Login successful! Welcome back, {username}")
+                    return
+        attempts += 1
+        if attempts < 3:
+            print(f"Login failed. Invalid username or password. You have {3 - attempts} attempts left.")
+        else:
+            print("Login failed. No attempts left. Please try again later.")
 
 
 
