@@ -16,6 +16,9 @@ def ask_if_has_account():
             else:
                 print("No worries! Let's create an account for you.")
                 create_account()
+                print("Your accounts has been created, Now log in")
+                login_account()
+                main()
             return user_input
         else:
             print("Invalid input. Please enter 'Y' or 'N'.")
@@ -27,17 +30,28 @@ def hash_password(password):
     hex_dig = hash_object.hexdigest()
     return hex_dig
 
-
 def create_account():
-    username = input("Enter a username: ")
-    email = input("Enter an email address: ")
-    password = input("Enter a password: ")
-    hashed_password = hash_password(password)
-    save_account(username, email, hashed_password, account_number=(generate_account_number()))
-    # print(f"Hashed Password: {hashed_password}")
-    account_number = generate_account_number()
-    print(f"Account created for {username}!, Your Account number is:{account_number}")
+    while True:
+        username = input("Enter a username: ").strip()
+        if not username:
+            print("Username cannot be empty. Please try again.")
+            continue
 
+        email = input("Enter an email address: ").strip()
+        if not email or "@" not in email:
+            print("Invalid email address. Please try again.")
+            continue
+
+        password = input("Enter a password: ").strip()
+        if not password:
+            print("Password cannot be empty. Please try again.")
+            continue
+
+        hashed_password = hash_password(password)
+        account_number = generate_account_number()
+        save_account(username, email, hashed_password, account_number)
+        print(f"Account created for {username}! Your Account number is: {account_number}")
+        break
 
 
 def generate_account_number():
