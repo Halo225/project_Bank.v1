@@ -1,6 +1,4 @@
-import random
-import csv
-import hashlib
+import random, hashlib, csv
 # from os import write
 from Main import main
 
