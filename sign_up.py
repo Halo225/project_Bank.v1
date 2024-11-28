@@ -1,7 +1,7 @@
 import random
 import csv
 import hashlib
-from os import write
+# from os import write
 from Main import main
 
 
