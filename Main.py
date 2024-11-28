@@ -4,6 +4,8 @@ from sign_up import login_account
 
 def main():
     username = login_account()
+    if not username:
+        return
     print(f"Welcome to Your Bank, {username}!")
     print("What would you like to do today?")
 
@@ -121,12 +123,6 @@ def update_balance_by_account_number(account_number, new_balance):
         print(f"Balance updated for account number: {account_number} to ${new_balance}")
     else:
         print("Account number not found.")
-
-def store_transaction(transaction_type, amount):
-    with open('transactions.csv', mode='a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([transaction_type, amount])
-    print(f"{transaction_type.capitalize()} of ${amount} recorded in transactions.csv.")
 
 if __name__ == "__main__":
     main()
