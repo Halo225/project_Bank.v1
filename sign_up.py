@@ -2,7 +2,6 @@ import random, hashlib, csv
 # from os import write
 from Main import main
 
-
 def ask_if_has_account():
     while True:
         user_input = input("Do you have an account? (Y/N): ").upper()
@@ -10,7 +9,6 @@ def ask_if_has_account():
             if user_input == 'Y':
                 print("Great! You have an account.")
                 login_account()
-                main()
             else:
                 print("No worries! Let's create an account for you.")
                 create_account()
@@ -67,7 +65,8 @@ def login_account():
             reader = csv.reader(file)
             for row in reader:
                 if row[0] == username and row[2] == hashed_password:
-                    print(f"Login successful! Welcome back, {username}")
+                    print(f"Login successful! Welcome to Maze_bank, {username}")
+                    main()
                     return
         attempts += 1
         if attempts < 3:
