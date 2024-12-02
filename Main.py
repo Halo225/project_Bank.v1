@@ -6,7 +6,7 @@ def main():
     username = login_account()
     if not username:
         return
-    print(f"Welcome to Your Bank, {username}!")
+    print(f"Welcome to Maze_bank, {username}!")
     print("What would you like to do today?")
 
     while True:
@@ -69,6 +69,13 @@ def deposit_funds(username):
         store_transaction("deposit", amount)
     else:
         print("Account not found.")
+
+def store_transaction(transaction_type, amount):
+    with open('transactions.csv', mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([transaction_type, amount])
+    print(f"{transaction_type.capitalize()} of ${amount} recorded in transactions.csv.")
+
 
 def get_balance(username):
     with open('sign_up.csv', mode='r', newline='') as file:
